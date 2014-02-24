@@ -2,7 +2,12 @@
 #ABSTRACT: Convert my custom YAML-based citation format to BibTeX 
 
 use v5.14.0;;
-use lib './Catmandu-BibTeX/lib';
+use Cwd qw(abs_path);
+
+# required unless patch to Catmandu applied
+use FindBin;
+use lib abs_path("$FindBin::Bin/Catmandu-BibTeX/lib");
+
 use Catmandu::Importer::YAML;
 use Catmandu::Exporter::BibTeX;
 use Catmandu::Fix::expand_date;
