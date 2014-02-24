@@ -7,5 +7,5 @@ YAML-based citation format to BibTeX.
 
 ## Usage
 
-  yaml2bib input.yaml output.bib
+  yaml2bib < input.yaml > output.bib
 
