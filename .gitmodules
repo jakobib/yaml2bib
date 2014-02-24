@@ -1,0 +1,3 @@
+[submodule "Catmandu-BibTeX"]
+	path = Catmandu-BibTeX
+	url = https://github.com/nichtich/Catmandu-BibTeX.git

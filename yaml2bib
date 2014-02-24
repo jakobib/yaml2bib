@@ -1,0 +1,25 @@
+#!/usr/bin/env perl
+#ABSTRACT: Convert my custom YAML-based citation format to BibTeX 
+
+use v5.14.0;;
+use lib './Catmandu-BibTeX/lib';
+use Catmandu::Importer::YAML;
+use Catmandu::Exporter::BibTeX;
+use Catmandu::Fix::expand_date;
+
+my $fix = sub {
+    my $record = $_[0];
+    Catmandu::Fix::expand_date::fix(undef,$record);
+};
+
+my $importer = Catmandu::Importer::YAML->new; 
+my $exporter = Catmandu::Exporter::BibTeX->new;
+
+$importer->each(sub {
+    while (my ($key, $record) = each %{$_[0]}) {
+        $record->{_citekey} = $key;
+        $fix->($record);
+        $exporter->add($record);
+    }
+});
+
